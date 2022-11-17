@@ -31,7 +31,8 @@ and if moneyInPocket is greater than 10.50.
 		System.out.println("Type 13 to determine if it is time to overseed the grass in Arizona");
 		
 		int input = in.nextInt();
-		if (input == 7) {
+		switch (input) {
+			case 7:
 				in.nextLine();  //This is necessary to consume the \n that nextInt() does not
 				System.out.println("Enter a word: ");
 				String word = in.nextLine();
@@ -41,6 +42,22 @@ and if moneyInPocket is greater than 10.50.
 					
 				String concatenatedWord = concatenateWord(word, n);
 				System.out.println(word + " concatenated " + n + " number of times is " + concatenatedWord);
+				break;
+			case 8:
+				break;
+			case 9:
+				break;
+			case 10:
+				break;
+			case 11:
+				break;
+			case 12:
+				break;
+			case 13:
+				break;
+			default:
+				System.out.println("You have entered an invalid menu option");
+				break;
 		}
 	}
 
