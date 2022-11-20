@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class MenuForWeek3And4Assignment {
 /*
 7.	Write a method that takes a String, word, and an int, n, as arguments and returns the word concatenated to itself n number of times. 
-(i.e. if I pass in “Hello” and 3, I expect the method to return “HelloHelloHello”).
+(i.e. if I pass in ï¿½Helloï¿½ and 3, I expect the method to return ï¿½HelloHelloHelloï¿½).
 8.	Write a method that takes two Strings, firstName and lastName, and returns a full name (the full name should be the first and the last name 
 as a String separated by a space).
 9.	Write a method that takes an array of int and returns true if the sum of all the ints in the array is greater than 100.
@@ -44,8 +44,38 @@ and if moneyInPocket is greater than 10.50.
 				System.out.println(word + " concatenated " + n + " number of times is " + concatenatedWord);
 				break;
 			case 8:
+				in.nextLine();  //This is necessary to consume the \n that nextInt() does not
+				System.out.println("Enter your first name: ");
+				String fName = in.nextLine();
+				System.out.println("Enter your last name: ");
+				String lName = in.nextLine();
+				
+				String fullName = retFullName(fName, lName);
+				
+				System.out.println("Full Name: " + fullName);
 				break;
 			case 9:
+				in.nextLine();
+				System.out.println("Enter a comma separated list of integers");
+				String listOfIntegers = in.nextLine();
+				String[] numbersString = listOfIntegers.split(",",0);
+				
+				//System.out.println(numbersString.length);  //just for debugging
+				
+				int[] numbers = new int[numbersString.length];
+				for (int i = 0;i<numbersString.length;i++) {
+					numbers[i] = Integer.parseInt(numbersString[i]);
+					//System.out.println(numbers[i]);  //debugging
+				}
+				
+				int sum = sumNumbers(numbers);
+				//System.out.println("Sum of numbers is: " + sum); //debugging
+				if (sum > 100) {
+					System.out.println("true");
+				} else {
+					System.out.println("false");
+				}
+				
 				break;
 			case 10:
 				break;
@@ -61,6 +91,19 @@ and if moneyInPocket is greater than 10.50.
 		}
 	}
 
+private static int sumNumbers(int[] numbers) {
+	int sum = 0;
+	for (int x=0;x<numbers.length;x++) {
+		sum += numbers[x];
+	}
+	return sum;
+}
+
+private static String retFullName(String fName, String lName) {
+		String fullName = fName + " " + lName;
+		return fullName;
+	}
+
 private static String concatenateWord(String word, int n) {
 	
 	String concatenatedWord = word;
@@ -70,5 +113,6 @@ private static String concatenateWord(String word, int n) {
 
 	return concatenatedWord;
 }
+
 
 }
