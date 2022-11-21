@@ -78,6 +78,21 @@ and if moneyInPocket is greater than 10.50.
 				
 				break;
 			case 10:
+				in.nextLine();
+				System.out.println("Enter a comma separated list of numbers (may include decimals)");
+				String listOfDoubles = in.nextLine();
+				String[] doublesString = listOfDoubles.split(",",0);
+				
+				//System.out.println(doublesString.length);  //just for debugging
+				
+				double[] doubles = new double[doublesString.length];
+				for (int i = 0;i<doublesString.length;i++) {
+					doubles[i] = Double.parseDouble(doublesString[i]);
+					//System.out.println(doubles[i]);  //debugging
+				}
+				
+				double avg = avgNumbers(doubles);
+				System.out.println("Average of numbers is: " + avg); //debugging
 				break;
 			case 11:
 				break;
@@ -90,6 +105,16 @@ and if moneyInPocket is greater than 10.50.
 				break;
 		}
 	}
+
+private static double avgNumbers(double[] numbers) {
+	double avg = 0;
+	double sum = 0;
+	for (int i=0;i<numbers.length;i++) {
+		sum += numbers[i];
+	}
+	avg = sum/numbers.length;
+	return avg;
+}
 
 private static int sumNumbers(int[] numbers) {
 	int sum = 0;
