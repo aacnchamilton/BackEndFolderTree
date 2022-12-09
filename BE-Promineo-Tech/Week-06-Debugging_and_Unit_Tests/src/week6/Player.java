@@ -1,33 +1,45 @@
 package week6;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
 	
-	ArrayList<String> hand = new ArrayList<String>();
+	List<Card> hand = new ArrayList<Card>();
 	int score = 0;
 	String name = null;
 	
 	public Player() {
-		// TODO Auto-generated constructor stub
 	}
 	
-	public void describe() {
-		System.out.println("Player Name: " + name);
-		System.out.println("card " + hand);
+	public void describe(Card card) {
+		System.out.println(this.name + " flips " + card.getCardName());
 	}
 	
-	public String flip() {
-		
-		return this.hand.get(0);
+	public Card flip() {
+		Card card = this.hand.get(0);
+		this.hand.remove(0);
+		return card;
 	}
 	
-	public String draw(Deck deck);{
-		retun deck.draw(deck);
+	public Card draw(Deck deck){
+		return deck.draw();
 	}
 	
 	public void incrementScore() {
 		this.score += 1;
+	}
+	
+	public int getScore() {
+		return this.score;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 
 }

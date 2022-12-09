@@ -30,17 +30,23 @@ public class Deck {
 	}
 	
 	public void shuffle() {
-		Collections.shuffle(this.deckOfCards);
+		Collections.shuffle(this.deckOfCards);  //Uses the native Collections method to shuffle the deck of cards. 
 	}
 	
 	public Card draw() {
-		return this.deckOfCards.get(0);
+		Card card = this.deckOfCards.get(0); //sets the card to the "top" of the deck
+		this.deckOfCards.remove(0);  //removes that card from the deck
+		return card;  //returns that card
 	}
 	
 	public void describe() {
 		for (Card card : this.deckOfCards) {
 			card.describe();
 		}
+	}
+	
+	public List<Card> getDeckOfCards(){
+		return this.deckOfCards;
 	}
 
 }

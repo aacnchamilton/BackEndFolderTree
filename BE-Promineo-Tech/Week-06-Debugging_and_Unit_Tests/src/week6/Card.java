@@ -2,8 +2,8 @@ package week6;
 
 public class Card {
 
-	int value = 0;
-	String name = null;
+	private int value = 0;
+	private String name = null;
 	
 	public Card() {
 		// TODO Auto-generated constructor stub
