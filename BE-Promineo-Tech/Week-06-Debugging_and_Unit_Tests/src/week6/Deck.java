@@ -1,6 +1,7 @@
 package week6;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Deck {
@@ -28,12 +29,18 @@ public class Deck {
 //		}
 	}
 	
-	public Deck shuffle(Deck deck) {
-		return deck;
+	public void shuffle() {
+		Collections.shuffle(this.deckOfCards);
 	}
 	
-	public String draw(ArrayList<String> deck) {
-		return deck.get(0);
+	public Card draw() {
+		return this.deckOfCards.get(0);
+	}
+	
+	public void describe() {
+		for (Card card : this.deckOfCards) {
+			card.describe();
+		}
 	}
 
 }

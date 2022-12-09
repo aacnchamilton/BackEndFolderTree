@@ -10,7 +10,9 @@ public class App {
 		Deck deck = new Deck();
 		//Player player1 = new Player();
 		//Player player2 = new Player();
-		//deck = deck.shuffle(deck);
+		deck.shuffle();
+		deck.describe();
+		
 		
 		
 
