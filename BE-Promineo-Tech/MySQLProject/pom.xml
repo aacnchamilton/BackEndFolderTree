@@ -4,7 +4,9 @@
   <artifactId>mysql-java</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <properties>
-  	<java.version>11</java.version>
+  	<java.version>17</java.version>
+  	<maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
   <dependencies>
   	<!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
