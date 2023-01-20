@@ -26,6 +26,15 @@ public class ProjectsApp {
 		while (!done) {
 			try {
 				int selection = getUserSelection();
+				switch (selection) {
+					case -1:
+						done = exitMenu();
+						break;
+					default:
+						System.out.println("\n" + selection + " is not a valid selection. Try again.");
+						break;
+				
+				}
 			}
 			catch(Exception e) {
 				System.out.println("\nError: " + e + "Try again.");
@@ -33,9 +42,14 @@ public class ProjectsApp {
 		}
 	}
 
+	private boolean exitMenu() {
+		System.out.println("Exiting the menu...");
+		return true;
+	}
+
 	private int getUserSelection() {
 		printOperations();
-		Integer input = getIntInput("Enter a manu selection");
+		Integer input = getIntInput("Enter a menu selection");
 		return Objects.isNull(input) ? -1 : input;
 	}
 

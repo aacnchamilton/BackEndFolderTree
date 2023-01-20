@@ -4,7 +4,7 @@ DROP TABLE if exists projects.project_category;
 DROP TABLE if exists projects.category;
 DROP TABLE if exists projects.project;
 
-CREATE TABLE project (
+CREATE TABLE projects.project (
   project_id int NOT NULL AUTO_INCREMENT,
   project_name varchar(128) NOT NULL,
   estimated_hours decimal(7,2) DEFAULT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE project (
   UNIQUE KEY project_id_UNIQUE (project_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE material (
+CREATE TABLE projects.material (
   material_id int NOT NULL AUTO_INCREMENT,
   project_id int NOT NULL,
   material_name varchar(128) NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE material (
   CONSTRAINT FK_ProjectMaterial FOREIGN KEY (project_id) REFERENCES project (project_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE step (
+CREATE TABLE projects.step (
   step_id int NOT NULL AUTO_INCREMENT,
   project_id int NOT NULL,
   step_text text NOT NULL,
@@ -36,14 +36,14 @@ CREATE TABLE step (
   CONSTRAINT FK_ProjectStep FOREIGN KEY (project_id) REFERENCES project (project_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE category (
+CREATE TABLE projects.category (
   category_id int NOT NULL AUTO_INCREMENT,
   category_name varchar(128) NOT NULL,
   PRIMARY KEY (category_id),
   UNIQUE KEY category_id_UNIQUE (category_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE project_category (
+CREATE TABLE projects.project_category (
   project_category_id int NOT NULL AUTO_INCREMENT,
   project_id int NOT NULL,
   category_id int NOT NULL,
