@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import projects.entity.Project;
 import projects.exception.DbException;
@@ -91,6 +92,11 @@ public class ProjectDao extends DaoBase {
 		} catch(SQLException e) {
 			throw new DbException(e);
 		}
+	}
+
+
+	public Optional<Project> fetchProjectById(int projectId) {
+		return null;
 	}
 
 }
