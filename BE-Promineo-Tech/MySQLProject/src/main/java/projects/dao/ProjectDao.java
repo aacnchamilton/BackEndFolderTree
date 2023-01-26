@@ -145,8 +145,8 @@ public class ProjectDao extends DaoBase {
 		// @formatter:off
 				String selectSQL = ""
 						+ "SELECT MAT.* " 
-						+ "FROM " + MATERIAL_TABLE + " MAT"
-						+ "WHERE PROJECT_ID = ?";
+						+ "FROM " + MATERIAL_TABLE + " MAT "
+						+ "WHERE MAT.PROJECT_ID = ?";
 		// @formatter:on
 
 		try (PreparedStatement stmt = con.prepareStatement(selectSQL)) {
@@ -165,8 +165,8 @@ public class ProjectDao extends DaoBase {
 		// @formatter:off
 		String selectSQL = ""
 				+ "SELECT STEP.* " 
-				+ "FROM " + STEP_TABLE + " STEP"
-				+ "WHERE PROJECT_ID = ?";
+				+ "FROM " + STEP_TABLE + " STEP "
+				+ "WHERE STEP.PROJECT_ID = ?";
 		// @formatter:on
 
 		try (PreparedStatement stmt = con.prepareStatement(selectSQL)) {
@@ -185,9 +185,9 @@ public class ProjectDao extends DaoBase {
 		// @formatter:off
 		String selectSQL = ""
 				+ "SELECT CAT.* " 
-				+ "FROM " + CATEGORY_TABLE + " CAT"
+				+ "FROM " + CATEGORY_TABLE + " CAT "
 				+ "INNER JOIN " + PROJECT_CATEGORY + " PC ON CAT.CATEGORY_ID = PC.CATEGORY_ID "
-				+ "WHERE PROJECT_ID = ?";
+				+ "WHERE PC.PROJECT_ID = ?";
 		// @formatter:on
 		
 		try (PreparedStatement stmt = con.prepareStatement(selectSQL)) {
