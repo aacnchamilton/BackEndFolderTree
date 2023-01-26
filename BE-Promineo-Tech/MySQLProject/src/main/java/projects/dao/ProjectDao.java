@@ -5,11 +5,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
+import projects.entity.Category;
+import projects.entity.Material;
 import projects.entity.Project;
+import projects.entity.Step;
 import projects.exception.DbException;
 import provided.util.DaoBase;
 
@@ -113,6 +118,13 @@ public class ProjectDao extends DaoBase {
 						project = extract(rs, Project.class);
 					}
 					
+					if (Objects.nonNull(project)) {
+						project.getMaterials().addAll(fetchMaterialsForProject(con, projectId));
+						project.getSteps().addAll(fetchStepsForProject(con, projectId));
+						project.getCategories().addAll(fetchCategoriesForProject(con, projectId));
+					}
+					
+					commitTransaction(con);
 					return Optional.ofNullable(project);
 										
 				} catch (Exception e) {
@@ -128,4 +140,65 @@ public class ProjectDao extends DaoBase {
 		}
 	}
 
+
+	private List<Material> fetchMaterialsForProject(Connection con, Integer projectId) throws SQLException{
+		// @formatter:off
+				String selectSQL = ""
+						+ "SELECT MAT.* " 
+						+ "FROM " + MATERIAL_TABLE + " MAT"
+						+ "WHERE PROJECT_ID = ?";
+		// @formatter:on
+
+		try (PreparedStatement stmt = con.prepareStatement(selectSQL)) {
+			setParameter(stmt,1,projectId, Integer.class);
+			try (ResultSet rs = stmt.executeQuery()){
+				List<Material> mat = new LinkedList<>();
+				while (rs.next()) {
+					mat.add(extract(rs, Material.class));
+				}
+				return mat;
+			}
+		}
+	}
+	
+	private List<Step> fetchStepsForProject(Connection con, Integer projectId) throws SQLException{
+		// @formatter:off
+		String selectSQL = ""
+				+ "SELECT STEP.* " 
+				+ "FROM " + STEP_TABLE + " STEP"
+				+ "WHERE PROJECT_ID = ?";
+		// @formatter:on
+
+		try (PreparedStatement stmt = con.prepareStatement(selectSQL)) {
+			setParameter(stmt,1,projectId, Integer.class);
+			try (ResultSet rs = stmt.executeQuery()){
+				List<Step> step = new LinkedList<>();
+				while (rs.next()) {
+					step.add(extract(rs, Step.class));
+				}
+				return step;
+			}
+		}
+	}
+	
+	private List<Category> fetchCategoriesForProject(Connection con, Integer projectId) throws SQLException{
+		// @formatter:off
+		String selectSQL = ""
+				+ "SELECT CAT.* " 
+				+ "FROM " + CATEGORY_TABLE + " CAT"
+				+ "INNER JOIN " + PROJECT_CATEGORY + " PC ON CAT.CATEGORY_ID = PC.CATEGORY_ID "
+				+ "WHERE PROJECT_ID = ?";
+		// @formatter:on
+		
+		try (PreparedStatement stmt = con.prepareStatement(selectSQL)) {
+			setParameter(stmt,1,projectId, Integer.class);
+			try (ResultSet rs = stmt.executeQuery()){
+				List<Category> cat = new LinkedList<>();
+				while (rs.next()) {
+					cat.add(extract(rs, Category.class));
+				}
+				return cat;
+			}
+		}
+	}
 }
