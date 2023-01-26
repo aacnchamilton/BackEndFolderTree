@@ -96,7 +96,36 @@ public class ProjectDao extends DaoBase {
 
 
 	public Optional<Project> fetchProjectById(int projectId) {
-		return null;
+		// @formatter:off
+		String selectSQL = ""
+				+ "SELECT PROJECT_ID, PROJECT_NAME, ESTIMATED_HOURS, ACTUAL_HOURS, DIFFICULTY, NOTES " 
+				+ "FROM " + PROJECT_TABLE + " "
+				+ "WHERE PROJECT_ID = ?";
+		// @formatter:on
+		try (Connection con = DbConnection.getConnection()) {
+			
+			startTransaction(con);
+			try (PreparedStatement stmt = con.prepareStatement(selectSQL)) {
+				setParameter(stmt,1,projectId, Integer.class);
+				try (ResultSet rs = stmt.executeQuery()){
+					Project project = null;
+					if (rs.next()) {
+						project = extract(rs, Project.class);
+					}
+					
+					return Optional.ofNullable(project);
+										
+				} catch (Exception e) {
+					rollbackTransaction(con);
+					throw new DbException(e);
+				}
+				
+			} catch (Exception e) {
+				throw new DbException(e);
+			}
+		} catch(SQLException e) {
+			throw new DbException(e);
+		}
 	}
 
 }
