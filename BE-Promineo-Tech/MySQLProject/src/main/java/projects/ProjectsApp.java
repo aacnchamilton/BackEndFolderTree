@@ -145,7 +145,7 @@ public class ProjectsApp {
 		operations.forEach(line -> System.out.println("  " + line));
 		
 		if (Objects.isNull(curProject)) {
-			System.out.println("/nYou are not working with a project.");
+			System.out.println("\nYou are not working with a project.");
 		} else {
 			System.out.println("\nYou are working with project: " + curProject);
 		}
