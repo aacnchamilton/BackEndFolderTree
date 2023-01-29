@@ -201,4 +201,47 @@ public class ProjectDao extends DaoBase {
 			}
 		}
 	}
+
+
+	public boolean modifyProjectDetails(Project project) {
+		// @formatter:off
+				String updateSQL = ""
+						+ "update " + PROJECT_TABLE + " set " 
+						+ "project_name = ?, " 
+						+ "estimated_hours = ?, " 
+						+ "actual_hours = ?, " 
+						+ "difficulty = ?, " 
+						+ "notes = ? " 
+						+ "where project_id = ?";
+				// @formatter:on
+				
+				try (Connection con = DbConnection.getConnection()) {
+					
+					startTransaction(con);
+					try (PreparedStatement stmt = con.prepareStatement(updateSQL)) {
+						
+						setParameter(stmt,1,project.getProjectName(), String.class);
+						setParameter(stmt,2,project.getEstimatedHours(), BigDecimal.class);
+						setParameter(stmt,3,project.getActualHours(), BigDecimal.class);
+						setParameter(stmt,4,project.getDifficulty(), Integer.class);
+						setParameter(stmt,5,project.getNotes(), String.class);
+						setParameter(stmt,6,project.getProjectId(), Integer.class);
+						
+						int success = stmt.executeUpdate();
+						commitTransaction(con);
+						if (success == 1) {
+							return true;
+						} else {
+							return false;
+						}
+						
+					} catch (Exception e) {
+						rollbackTransaction(con);
+						throw new SQLException(e);
+					}
+					
+				} catch(SQLException e) {
+					throw new DbException(e);
+				}
+	}
 }
