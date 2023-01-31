@@ -1,0 +1,13 @@
+INSERT INTO project (project_name, estimated_hours, actual_hours, difficulty, notes) VALUES ('Install backsplash', 52, 69, 5, 'Watch youtube for ideas');
+INSERT INTO category (category_name) VALUES ('Kitchen');
+INSERT INTO material (project_id, material_name, num_required) values ((select project_id from project where project_name = 'Install backsplash'), 'Tile', 56);
+INSERT INTO material (project_id, material_name, num_required) values (1, 'Backing', 5);
+INSERT INTO material (project_id, material_name, num_required) values (1, 'Grout', 1);
+INSERT INTO material (project_id, material_name, num_required) values (1, 'Spacers', 100);
+INSERT INTO step (project_id, step_text, step_order) values (1, 'Remove existing backing, nails and sheetrock', 1);
+INSERT INTO step (project_id, step_text, step_order) values (1, 'Purchase materials', 2);
+INSERT INTO step (project_id, step_text, step_order) values (1, 'Install backing', 3);
+INSERT INTO step (project_id, step_text, step_order) values (1, 'Install tile', 4);
+INSERT INTO step (project_id, step_text, step_order) values (1, 'Apply grout', 5);
+INSERT INTO project_category (project_id, category_id) values (1, select category_id from category where category_name = 'Kitchen' );
+commit;

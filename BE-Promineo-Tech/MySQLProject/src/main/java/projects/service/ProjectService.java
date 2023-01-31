@@ -34,4 +34,11 @@ public class ProjectService {
 		}
 	}
 
+	public void deleteProject(int projectId) {
+		boolean successful = projectDao.deleteProject(projectId);
+		if (!successful) {
+			throw new DbException("Project with id: " + projectId + " doesn't exist.");
+		}
+	}
+
 }

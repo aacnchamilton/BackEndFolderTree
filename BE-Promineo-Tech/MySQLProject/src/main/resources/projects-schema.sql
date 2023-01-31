@@ -53,4 +53,18 @@ CREATE TABLE projects.project_category (
   CONSTRAINT FK_CategoryProject FOREIGN KEY (category_id) REFERENCES category (category_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     
+INSERT INTO projects.project (project_name, estimated_hours, actual_hours, difficulty, notes) VALUES ('Install backsplash', 52, 69, 5, 'Watch youtube for ideas');
+INSERT INTO projects.category (category_name) VALUES ('Kitchen');
+INSERT INTO projects.material (project_id, material_name, num_required) values ((select project_id from project where project_name = 'Install backsplash'), 'Tile', 56);
+INSERT INTO projects.material (project_id, material_name, num_required) values ((select project_id from project where project_name = 'Install backsplash'), 'Backing', 5);
+INSERT INTO projects.material (project_id, material_name, num_required) values ((select project_id from project where project_name = 'Install backsplash'), 'Grout', 1);
+INSERT INTO projects.material (project_id, material_name, num_required) values ((select project_id from project where project_name = 'Install backsplash'), 'Spacers', 100);
+INSERT INTO projects.step (project_id, step_text, step_order) values ((select project_id from project where project_name = 'Install backsplash'), 'Remove existing backing, nails and sheetrock', 1);
+INSERT INTO projects.step (project_id, step_text, step_order) values ((select project_id from project where project_name = 'Install backsplash'), 'Purchase materials', 2);
+INSERT INTO projects.step (project_id, step_text, step_order) values ((select project_id from project where project_name = 'Install backsplash'), 'Install backing', 3);
+INSERT INTO projects.step (project_id, step_text, step_order) values ((select project_id from project where project_name = 'Install backsplash'), 'Install tile', 4);
+INSERT INTO projects.step (project_id, step_text, step_order) values ((select project_id from project where project_name = 'Install backsplash'), 'Apply grout', 5);
+INSERT INTO projects.project_category (project_id, category_id) values ((select project_id from project where project_name = 'Install backsplash'), (select category_id from category where category_name = 'Kitchen') );
+commit;
+
       
