@@ -249,7 +249,7 @@ public class ProjectDao extends DaoBase {
 	public boolean deleteProject(int projectId) {
 		// @formatter:off
 		String deleteSQL = ""
-				+ "DELETE" 
+				+ "DELETE " 
 				+ "FROM " + PROJECT_TABLE 
 				+ " WHERE PROJECT_ID = ?";
 		// @formatter:on
