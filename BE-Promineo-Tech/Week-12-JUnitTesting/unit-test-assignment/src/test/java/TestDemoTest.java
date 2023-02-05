@@ -17,17 +17,14 @@ import static org.mockito.Mockito.doReturn;
 class TestDemoTest {
 
 	TestDemo testDemo;
-	TestDemo mockDemo = spy(testDemo);
+	TestDemo mockDemo;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		testDemo = new TestDemo();
+		mockDemo = spy(testDemo);
 	}
 	
-	@Test
-	void assertThatNumberSquaredIsCorrect() {
-		
-	}
 
 	@ParameterizedTest
 	@MethodSource("TestDemoTest#argumentsForAddPositive")
@@ -40,6 +37,13 @@ class TestDemoTest {
 					testDemo.addPositive(a, b))
 						.isInstanceOf(IllegalArgumentException.class);
 		}
+	}
+	
+	@Test
+	void assertThatNumberSquaredIsCorrect() {
+		doReturn(5).when(mockDemo).getRandomInt();
+		int fiveSquared = mockDemo.randomNumberSquared();
+		assertThat(fiveSquared).isEqualTo(25);
 	}
 	
 	static Stream<Arguments> argumentsForAddPositive() {
