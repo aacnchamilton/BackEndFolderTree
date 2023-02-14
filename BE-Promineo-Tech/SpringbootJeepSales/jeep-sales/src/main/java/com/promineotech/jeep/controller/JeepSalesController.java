@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import com.promineotech.jeep.entity.Jeep;
+import com.promineotech.jeep.entity.JeepModel;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -17,8 +18,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.servers.Server;
 
 @RequestMapping("/jeeps")
-@OpenAPIDefinition(info = @Info(title = "Jeep Sales Service"), servers = {
-    @Server(url = "http://localhost:8080", description = "Local server.")})
+@OpenAPIDefinition(info = @Info(title = "Jeep Sales Service"), 
+    servers = {@Server(url = "http://localhost:8080", description = "Local server")})
 public interface JeepSalesController {
   // @formatter:off
   @Operation(
@@ -61,10 +62,8 @@ public interface JeepSalesController {
   @GetMapping
   @ResponseStatus(code = HttpStatus.OK)
   List<Jeep> fetchJeeps(
-      @RequestParam(required = false) 
-        String model, 
-      @RequestParam(required = false) 
-        String trim);
-//@formatter:on
+      @RequestParam(required = false) JeepModel model, 
+      @RequestParam(required = false) String trim);
+  // @formatter:on
   
 }
