@@ -49,7 +49,7 @@ class FetchJeepTest {
       
       assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
       List<Jeep> expected = buildExpected();
-      System.out.println(expected);
+      System.out.println("expected: " + expected + ", response.getBody(): " + response.getBody());
       assertThat(response.getBody()).isEqualTo(expected);
   }
 
