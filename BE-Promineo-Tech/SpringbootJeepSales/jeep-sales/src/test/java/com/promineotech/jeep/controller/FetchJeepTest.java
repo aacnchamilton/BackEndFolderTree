@@ -37,20 +37,24 @@ class FetchJeepTest {
   
   @Test
   void testThatJeepsAreReturnedWhenAValidModelAndTrimAreSupplied() {
-  
+  //Given a valid model, trim and URI
       JeepModel model = JeepModel.WRANGLER;
       String trim = "Sport";
       String uri = String.format("http://localhost:%d/jeeps?model=%s&trim=%s", serverPort, model, trim);
       
       System.out.println("From FetchJeepTest: " + uri);
       
+      //When a connection is made to the URI
       ResponseEntity<List<Jeep>> response =  restTemplate.exchange(uri,HttpMethod.GET,null, 
           new ParameterizedTypeReference<>() {});
       
+      //Then a status code 200 is returned
       assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
       List<Jeep> expected = buildExpected();
-      System.out.println("expected: " + expected + ", response.getBody(): " + response.getBody());
-      assertThat(response.getBody()).isEqualTo(expected);
+      List<Jeep> actual = response.getBody();
+      System.out.println("buildExpected: " + expected + ", response.getBody(): " + actual);
+      
+      assertThat(actual).isEqualTo(expected);
   }
 
   private List<Jeep> buildExpected() {

@@ -1,5 +1,6 @@
 package com.promineotech.jeep.dao;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -28,7 +29,7 @@ public class DefaultJeepSalesDao implements JeepSalesDao {
     log.debug("DefaultJeepSalesDao: model={}, trim={}", model, trim);
    
   
-    String sql = "SELECT * FROM models WHERE model_id = : model_id and trim_level = :trim_level";
+    String sql = "SELECT * FROM models WHERE model_id = :model_id and trim_level = :trim_level";
   
     Map<String, Object> params = new HashMap<>();
     params.put("model_id", model.toString());
@@ -38,8 +39,16 @@ public class DefaultJeepSalesDao implements JeepSalesDao {
 
       @Override
       public Jeep mapRow(ResultSet rs, int rowNum) throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
+        // @formatter:off
+        return Jeep.builder()
+            .basePrice(new BigDecimal(rs.getString("base_price")))
+            .modelId(JeepModel.valueOf(rs.getString("model_id")))
+            .modelPk(rs.getLong("model_pk"))
+            .numDoors(rs.getInt("num_doors"))
+            .trimLevel(rs.getString("trim_level"))
+            .wheelSize(rs.getInt("wheel_size"))
+            .build();
+        // @formatter:on
       }
       
     });
