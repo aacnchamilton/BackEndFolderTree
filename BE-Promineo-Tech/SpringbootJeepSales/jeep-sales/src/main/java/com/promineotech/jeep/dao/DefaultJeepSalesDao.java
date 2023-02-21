@@ -26,7 +26,7 @@ public class DefaultJeepSalesDao implements JeepSalesDao {
   
   @Override
   public List<Jeep> fetchJeeps(JeepModel model, String trim) {
-    log.debug("DefaultJeepSalesDao: model={}, trim={}", model, trim);
+    log.debug("DefaultJeepSalesDao.fetchJeeps: model={}, trim={}", model, trim);
    
   
     String sql = "SELECT * FROM models WHERE model_id = :model_id and trim_level = :trim_level";
