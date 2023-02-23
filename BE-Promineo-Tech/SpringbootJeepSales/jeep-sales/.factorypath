@@ -49,6 +49,7 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-tx/5.3.24/spring-tx-5.3.24.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-context/5.3.24/spring-context-5.3.24.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/mysql/mysql-connector-j/8.0.31/mysql-connector-j-8.0.31.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/boot/spring-boot-devtools/2.7.6/spring-boot-devtools-2.7.6.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/boot/spring-boot/2.7.6/spring-boot-2.7.6.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/boot/spring-boot-autoconfigure/2.7.6/spring-boot-autoconfigure-2.7.6.jar" enabled="true" runInBatchMode="false"/>
