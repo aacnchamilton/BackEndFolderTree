@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-@RequestMapping("/jeeps")
+@RequestMapping("/orders")
 @Validated
 public interface JeepOrderController {
   
@@ -27,14 +27,14 @@ public interface JeepOrderController {
               responseCode = "201", 
               description = "Order for Jeep Created", 
               content = @Content(mediaType = "application/json", 
-              schema = @Schema(implementation = OrderRequest.class))),
+              schema = @Schema(implementation = Order.class))),
           @ApiResponse(
               responseCode = "400", 
               description = "The request parameters are invalid", 
               content = @Content(mediaType = "application/json")),
           @ApiResponse(
               responseCode = "404", 
-              description = "No Jeeps were found with the input criteria", 
+              description = "A Jeep Component was not found with the input criteria", 
               content = @Content(mediaType = "application/json")),
           @ApiResponse(
               responseCode = "500", 
@@ -45,8 +45,8 @@ public interface JeepOrderController {
           @Parameter(
               name = "orderRequest", 
               allowEmptyValue = false, 
-              required = false, 
-              description = "JSON body of an Order Request"),
+              required = true, 
+              description = "JSON body of an Order Request")
       }
       
   )
@@ -54,7 +54,7 @@ public interface JeepOrderController {
   @PostMapping
   @ResponseStatus(code = HttpStatus.CREATED)
   Order createOrder(
-      @RequestBody(required = false) OrderRequest orderRequest);
+      @RequestBody(required = true) OrderRequest orderRequest);
   // @formatter:on
 
 }
