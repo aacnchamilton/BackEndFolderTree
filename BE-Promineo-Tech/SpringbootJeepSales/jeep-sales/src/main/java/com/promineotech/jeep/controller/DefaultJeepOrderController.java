@@ -16,7 +16,7 @@ public class DefaultJeepOrderController implements JeepOrderController {
   
   @Override
   public Order createOrder(OrderRequest orderRequest) {
-    log.info("DefaultJeepOrderController.createOrder: Order Request input body: {}", orderRequest);
+    log.info("DefaultJeepOrderController.createOrder: orderRequest = {}", orderRequest);
     return jeepOrderService.createOrder(orderRequest);
   }
 
