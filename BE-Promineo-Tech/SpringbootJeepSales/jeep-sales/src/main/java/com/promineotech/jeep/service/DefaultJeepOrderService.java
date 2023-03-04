@@ -41,6 +41,11 @@ public class DefaultJeepOrderService implements JeepOrderService {
         .add(engine.getPrice())
         .add(tire.getPrice());
     
+    for (Option option : options) {
+      price.add(option.getPrice());
+    }
+    
+    
     return jeepOrderDao.saveOrder(customer, jeep, color, engine, tire, price, options);
   }
   
